@@ -26,8 +26,8 @@ pub(crate) struct ResizePty {
 pub struct SshPty {
     pub(crate) channel: ChannelId,
     pub(crate) tx: Option<SessionSender>,
-    pub(crate) reader: FileDescriptor,
-    pub(crate) writer: FileDescriptor,
+    pub reader: FileDescriptor,
+    pub writer: FileDescriptor,
     pub(crate) size: Mutex<PtySize>,
 }
 
@@ -93,7 +93,7 @@ impl portable_pty::MasterPty for SshPty {
 pub struct SshChildProcess {
     pub(crate) channel: ChannelId,
     pub(crate) tx: Option<SessionSender>,
-    pub(crate) exit: Receiver<ExitStatus>,
+    pub exit: Receiver<ExitStatus>,
     pub(crate) exited: Option<ExitStatus>,
 }
 
