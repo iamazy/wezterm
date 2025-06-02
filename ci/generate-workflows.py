@@ -8,6 +8,7 @@ TRIGGER_PATHS = [
     "**/*.rs",
     "**/Cargo.lock",
     "**/Cargo.toml",
+    ".cargo/config.toml",
     "assets/fonts/**/*",
     "assets/icon/*",
     "ci/deploy.sh",
@@ -136,7 +137,7 @@ class CacheStep(ActionStep):
 
 class SccacheStep(ActionStep):
     def __init__(self, name):
-        super().__init__(name, action="mozilla-actions/sccache-action@v0.0.7")
+        super().__init__(name, action="mozilla-actions/sccache-action@v0.0.9")
 
 
 class CheckoutStep(ActionStep):
@@ -574,7 +575,7 @@ rustup default {toolchain}
         if self.app_image:
             patterns.append("*src.tar.gz")
             patterns.append("*.AppImage")
-            patterns.append("*.zsync")
+            #patterns.append("*.zsync") broken upstream: <https://github.com/linuxdeploy/linuxdeploy/issues/309>
         return patterns
 
     def upload_artifact_nightly(self):

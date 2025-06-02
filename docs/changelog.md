@@ -61,6 +61,12 @@ As features stabilize some brief notes about them will accumulate here.
 * Preliminary support for ConEmu style progress escape sequences. See
   [pane:get_progress()](config/lua/pane/get_progress.md) for more information.
   #6581
+* [InputSelector](config/lua/keyassignment/InputSelector.md) now allows
+  setting `input_selector_label_bg` and `input_selector_label_fg` colors in
+  the `colors` section of your configuration.  Thanks to @mgpinf! #6682
+* `wezterm imgcat --hold` now avoids local echo and accepts pressing `Escape`,
+  `CTRL-C` and `CTRL-D` as various ways of exiting hold mode. Thanks to
+  @mgpinf! #6801
 
 #### New
 * [wezterm.serde](config/lua/wezterm.serde/index.md) module for serialization
@@ -92,6 +98,43 @@ As features stabilize some brief notes about them will accumulate here.
   `skip_action_on_paste` option. Thanks to @nhurlock! #6405
 * Docs for writing [Plugins](config/plugins.md). Thanks to @alecthegeek and
   @MLFlexer! #6188
+* [macos_fullscreen_extend_behind_notch](config/lua/config/macos_fullscreen_extend_behind_notch.md)
+  option. Thanks to @wryanzimmerman! #5759
+* [quick_select_remove_styling](config/lua/config/quick_select_remove_styling.md)
+  option to make it easier to spot matches on colorful screens. Thanks to
+  @mgpinf! #6683 #4022
+* `tmux -CC` support is now very usable. Thanks to @joexue! #6602 #336
+* [Confirmation](config/lua/keyassignment/Confirmation.md) key assignment
+  that can be used to show a confirmation prompt. Thanks to @mgpinf! #6707
+* [launcher_alphabet](config/lua/config/launcher_alphabet.md) option for
+  [ShowLauncherArgs](config/lua/keyassignment/ShowLauncherArgs.md).
+  Thanks to @mgpinf! #6677
+* [window_decorations](config/lua/config/window_decorations.md) now supports
+  `MACOS_USE_BACKGROUND_COLOR_AS_TITLEBAR_COLOR` to match the macOS window
+  titlebar background color to the terminal background color defined by
+  your configuration. Thanks to @Jay-Madden! #6558
+* [char_select_font](config/lua/config/char_select_font.md),
+  [command_palette_font](config/lua/config/command_palette_font.md), and
+  [pane_select_font](config/lua/config/pane_select_font.md) options to control
+  the fonts for those respective overlays/modals.  Thanks to @mgpinf! #6696
+* Git branch and progress bar symbols have been added to
+  [custom_block_glyphs](config/lua/config/custom_block_glyphs.md). Thanks to
+  @BenBergman! #6328 #6873 #6875
+* [cell_widths](config/lua/config/cell_widths.md) option for explicit
+  control over cell widths. Thanks to @hamano! #6289 #6290
+* [kde_window_background_blur](config/lua/config/kde_window_background_blur.md) option
+  to enable window blur when running under KDE Plasma on Wayland systems.
+  Thanks to @psomani16k! #6905
+* [reverse_video_cursor_min_contrast](config/lua/config/reverse_video_cursor_min_contrast.md)
+  option. Thanks to @jameshurst! #6584 ?2861
+* [text_min_contrast_ratio](config/lua/config/text_min_contrast_ratio.md) to more generally
+  improve the contrast ratio for text in the terminal.
+* New `launcher_label_fg` and `launcher_label_bg` options for to customize
+  the [Launcher Menu](config/launch.md#the-launcher-menu). Thanks to @mgpinf!
+  #6796
+* [TabInformation](config/lua/TabInformation.md) now exposes `is_last_active` as
+  a boolean property to indicate whether a tab was the prior active tab.
+  Thanks to @masriomarm! #6895
 
 #### Fixed
 * Race condition when very quickly adjusting font scale, and other improvements
@@ -181,13 +224,31 @@ As features stabilize some brief notes about them will accumulate here.
   #6028 #6029
 * Glyph '┽', was rendering as '┥' when `custom_block_glyphs` was enabled.
   Thanks to @bew! #6661 #6655
+* Windows: stack overflow when using `tmux -CC`. Thanks to @joexue! #6704 #6671
+* `get_text_from_semantic_zone` didn't include the last line of text. Thanks to
+  @mgpinf! #6248 #5806 #5346
+* Deadlock when a domain detaches due to SSH timeout. Thanks to @joexue! #6749
+  #6750
+* Panic when rewrapping very very long lines. #6729
+* CUP position parameters were mandatory when they should have been optional.
+  Thanks to @wojciech-graj! #6860
+* Long CSI sequences were not parsed correctly. Thanks to @jdugan6240! #5161
+  #6194
+* IBus IME working unreliably. Thanks to @pjm0616! #5125
+* Pixel aliasing issue when using
+  [window_content_alignment](config/lua/config/window_content_alignment.md) =
+  `Center`. Thanks to @juster-0! #6929 #6928 #6823
+* Passing a `SpawnCommand` to the `SwitchToWorkspace` assignment would ignore
+  `set_environment_variables`. Thanks to @vincentbesanceney! #6850 #6845
+* `libssh` based ssh sessions will now respect `ServerAliveInterval`. #4023
 
 #### Updated
 * Bundled conpty.dll and OpenConsole.exe to build 1.22.250204002.nupkg
-* Bundled harfbuzz to 10.2.0
+* Bundled harfbuzz to 11.2.1
 * Bundled libssh to 0.11.1
 * Bundled freetype to 2.13.3
 * Bundled Nerd Font Symbols font to v3.3.0
+* Bundled Noto Color Emoji font to 2.047
 * image crate to 0.25, which means that JPEG images are now decoded via
   [zune-jpeg](https://docs.rs/zune-jpeg/latest/zune_jpeg/), which improves
   handling of non-conforming jpeg images. #5365
