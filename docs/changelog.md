@@ -135,6 +135,8 @@ As features stabilize some brief notes about them will accumulate here.
 * [TabInformation](config/lua/TabInformation.md) now exposes `is_last_active` as
   a boolean property to indicate whether a tab was the prior active tab.
   Thanks to @masriomarm! #6895
+* Indicate support for OSC 52 (clipboard extensions) in Primary DA Response.
+  Thanks to @j4james! #7046
 
 #### Fixed
 * Race condition when very quickly adjusting font scale, and other improvements
@@ -241,6 +243,17 @@ As features stabilize some brief notes about them will accumulate here.
 * Passing a `SpawnCommand` to the `SwitchToWorkspace` assignment would ignore
   `set_environment_variables`. Thanks to @vincentbesanceney! #6850 #6845
 * `libssh` based ssh sessions will now respect `ServerAliveInterval`. #4023
+* macOS: prevent infinite loop in `Services` menu validation. Thanks to @cpick!
+  #7098 #6738 #6833 #6864
+* Wayland: fixed issue with fractional scaling. Thanks to @kalebo! #7277
+* Incorrect boundary condition in renderstate. Thanks to @I-Info! #7274
+* MacOS: fix memory leak in macOS MetalLayer management. Thanks to @I-Info!
+  #7283
+* [max_fps](config/lua/config/max_fps.md) can now be set to values larger than
+  `255`. Thanks to @beckend! #7366
+* macOS: Fix toast notifications. Thanks to @nikhilm! #7483
+* termwiz: Fixed parsing of fragmented mouse reporting sequence. Thanks to
+  @jgiannuzzi! #7076 #7504
 
 #### Updated
 * Bundled conpty.dll and OpenConsole.exe to build 1.22.250204002.nupkg
